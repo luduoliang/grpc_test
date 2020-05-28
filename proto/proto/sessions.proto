@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+import public "google/protobuf/timestamp.proto";
+
+package sessions;
+
+
+service Waiter {
+  rpc AddPddSessions (RequestAddPddSessions) returns (ResponseAddPddSessions) {}
+  rpc UpdatePddSessions (RequestUpdatePddSessions) returns (ResponseUpdatePddSessions) {}
+  rpc DeletePddSessions (RequestDeletePddSessions) returns (ResponseDeletePddSessions) {}
+  rpc GetPddSessionsInfo (RequestGetPddSessionsInfo) returns (ResponseGetPddSessionsInfo) {}
+  rpc GetPddSessionsList (RequestGetPddSessionsList) returns (ResponseGetPddSessionsList) {}
+}
+
+
+message PddSessions {
+    sint32 id = 1;
+    sint32 taokeID = 2;
+    string screenName = 3;
+    string openId = 4;
+    string token = 5;
+    google.protobuf.Timestamp expiredAt = 6;
+    string refreshToken = 7;
+    google.protobuf.Timestamp refreshExpiredAt = 8;
+    sint32 isDefault = 9;
+    google.protobuf.Timestamp createdAt = 10;
+    google.protobuf.Timestamp updatedAt = 11;
+}
+
+
+message ResponseGetPddSessionsInfo {
+  PddSessions pddSessions = 1;
+}
+
+message RequestGetPddSessionsInfo {
+  sint32 id = 1;
+}
+
+message ResponseGetPddSessionsList {
+  repeated PddSessions pddSessions = 1;
+  sint32 total = 2;
+}
+
+message RequestGetPddSessionsList {
+  sint32 page = 1;
+  sint32 per_page = 2;
+}
+
+message RequestAddPddSessions {
+    PddSessions pddSessions = 1;
+}
+
+message ResponseAddPddSessions {
+    PddSessions pddSessions = 1;
+}
+
+message RequestUpdatePddSessions {
+    PddSessions pddSessions = 1;
+}
+
+message ResponseUpdatePddSessions {
+    PddSessions pddSessions = 1;
+}
+
+message RequestDeletePddSessions {
+  sint32 id = 1;
+}
+
+message ResponseDeletePddSessions {
+}
